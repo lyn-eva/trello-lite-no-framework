@@ -1,0 +1,379 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic);
+* {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+body {
+  background-color: #0079bf;
+  position: relative;
+}
+
+button {
+  font-size: 1rem;
+  border: none;
+}
+
+button:hover, .card:hover {
+  cursor: pointer;
+}
+
+textarea {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border: none;
+  border-radius: 3px;
+  z-index: -1;
+  font-size: 1.17rem;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  resize: none;
+}
+
+.rename {
+  height: 4.5rem;
+}
+
+.rename textarea {
+  z-index: 0;
+}
+
+.card .card-ctr .rename {
+  height: 4.2rem;
+}
+
+.card p, .list-title h3 {
+  white-space: pre-wrap;
+}
+
+textarea:focus {
+  outline: 2px solid blue;
+}
+
+header {
+  background-color: rgba(255, 255, 255, 0.15);
+  -webkit-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  height: 2.5rem;
+  width: 100%;
+}
+
+.main-ctr {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: .5rem;
+  padding: .5rem;
+}
+
+.add-list i, .list-fdr i {
+  margin-right: .5rem;
+}
+
+.add-list {
+  min-width: 280px;
+  height: 2.5rem;
+}
+
+.add-list button {
+  width: 100%;
+  height: 100%;
+  padding: 0 1rem;
+  text-align: left;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #a1a8ab;
+}
+
+.add-list button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  -webkit-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+}
+
+.list-ctr {
+  background-color: #ebecf0;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 280px;
+          flex: 0 0 280px;
+  padding: .6rem;
+  border-radius: 5px;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  position: relative;
+}
+
+.list-ctr button:hover {
+  background-color: #CCC;
+}
+
+.list-hdr {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin: 4px 0;
+  padding-right: 6px;
+}
+
+.list-hdr .list-title {
+  width: 240px;
+  min-height: 26px;
+  position: relative;
+}
+
+.list-hdr textarea, .list-hdr h3 {
+  padding-left: 6px;
+}
+
+.list-hdr h3, .list-hdr button {
+  font-weight: 400;
+}
+
+.list-hdr h3 {
+  line-height: 1.4;
+}
+
+.list-hdr h3:hover {
+  cursor: pointer;
+}
+
+.list-hdr i {
+  pointer-events: none;
+}
+
+.list-menu {
+  pointer-events: none;
+  opacity: 0;
+  position: absolute;
+  left: 88%;
+  top: 2.3rem;
+  width: 100%;
+  background-color: #fff;
+  padding: .3rem 1rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: inherit;
+  -webkit-box-shadow: 0 0 4px #777;
+          box-shadow: 0 0 4px #777;
+  z-index: 1;
+}
+
+.list-menu h4 {
+  text-align: center;
+  font-weight: 400;
+  line-height: 1.7;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #444;
+}
+
+.list-menu ul {
+  margin: 1rem 0;
+}
+
+.list-menu li {
+  font-size: 15px;
+  padding: 6px 0 6px 6px;
+  -webkit-transition: 200ms;
+  transition: 200ms;
+  color: #2B2D42;
+  border-left: 3px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.list-menu li:hover {
+  cursor: pointer;
+  border-color: #000;
+  background-color: #CCC;
+}
+
+.list-menu-dropped {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.list-main {
+  min-height: 1rem;
+  padding-top: .01px;
+  margin: .6rem 0;
+  outline: 2px solid red;
+}
+
+.list-fdr button {
+  width: 100%;
+  padding: 9px .4rem;
+  text-align: left;
+  border-radius: 5px;
+}
+
+.drag-init > * {
+  pointer-events: none;
+}
+
+.card-block {
+  background-color: transparent;
+}
+
+.card-block + .card-block {
+  margin-top: .4rem;
+}
+
+.dragged * {
+  pointer-events: none;
+}
+
+.dragged-item {
+  -webkit-box-shadow: 0 0 30px #000;
+          box-shadow: 0 0 30px #000;
+}
+
+.card {
+  padding: 8px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 0px 0px #091e4240;
+          box-shadow: 0 1px 0px 0px #091e4240;
+  border-radius: 3px;
+  -webkit-transform-origin: center top;
+          transform-origin: center top;
+  -webkit-animation: addCard 300ms;
+          animation: addCard 300ms;
+}
+
+.card:hover {
+  background-color: #e7d7e6;
+}
+
+.card .card-ctr {
+  position: relative;
+}
+
+.card .labels {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 1%;
+}
+
+.card .label-item {
+  background-color: orange;
+  border-radius: 3px;
+  height: 6px;
+  width: 24%;
+  margin-bottom: 3px;
+}
+
+.card .card-content {
+  position: relative;
+  width: 264px;
+}
+
+.card p, .card textarea {
+  font-size: 15px;
+  font-weight: 300;
+  min-height: 30.4px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  word-wrap: break-word;
+  padding: 6px 4px;
+  width: 100%;
+}
+
+.card i {
+  position: absolute;
+  right: .9rem;
+  top: .5rem;
+  opacity: 0;
+  -webkit-transition: opacity 300ms;
+  transition: opacity 300ms;
+}
+
+.card i:hover {
+  color: #f00;
+}
+
+.card i:first-of-type {
+  right: 2.4rem;
+}
+
+.card i:first-of-type:hover {
+  color: #314cb6;
+}
+
+.card:hover i {
+  opacity: 1;
+}
+
+.drag-enter {
+  background-color: greenyellow;
+}
+
+.delete-card {
+  -webkit-animation: deleteCard 400ms;
+          animation: deleteCard 400ms;
+}
+
+@-webkit-keyframes addCard {
+  0% {
+    -webkit-transform: scaleY(0.2);
+            transform: scaleY(0.2);
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+  }
+}
+
+@keyframes addCard {
+  0% {
+    -webkit-transform: scaleY(0.2);
+            transform: scaleY(0.2);
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+  }
+}
+
+@-webkit-keyframes deleteCard {
+  0% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+  }
+  100% {
+    -webkit-transform: scaleY(0);
+            transform: scaleY(0);
+  }
+}
+
+@keyframes deleteCard {
+  0% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+  }
+  100% {
+    -webkit-transform: scaleY(0);
+            transform: scaleY(0);
+  }
+}
+/*# sourceMappingURL=app.css.map */
