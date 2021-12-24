@@ -118,7 +118,6 @@ header {
    .list-title {
       width: 240px;
       min-height: 26px;
-      // outline: 1px solid red;
       position: relative;
    }
    textarea, h3 {
@@ -184,7 +183,6 @@ header {
    min-height: 1rem;
    padding-top: .01px;
    margin: .6rem 0;
-   outline: 2px solid red;
 }
 .list-fdr {
    button {
@@ -195,17 +193,9 @@ header {
    }
 }
 
-.drag-init > * {
-   pointer-events: none;
-}
-
-.card-block {
-   background-color: transparent;
-}
 .card-block + .card-block {
    margin-top: .4rem;
 }
-
 
 .dragged * {
    pointer-events: none;
@@ -213,8 +203,6 @@ header {
 .dragged-item {
    box-shadow: 0 0 30px #000;
 }
-
-
 
 .card {
    padding: 8px;
@@ -224,9 +212,6 @@ header {
    transform-origin: center top;
    animation: addCard 300ms; // add card
     
-   // & + & {
-   //    margin-top: .4rem;
-   // }
    &:hover {
       background-color: #e7d7e6;
    }
@@ -278,12 +263,6 @@ header {
       opacity: 1;
    }
 }
-
-// .drag-start:hover {
-//    // opacity: 0;
-//    box-shadow: 0 0 30px #000;
-//    background-color: red;
-// }
 .drag-enter {
    background-color: greenyellow;
 }

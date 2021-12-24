@@ -34,11 +34,12 @@ function listComponent(nthList) {
    listMenuBtn.onclick = () => {
       listMenu.classList.toggle("list-menu-dropped");
    };
-
+   //delete
    const deleteList = listMenu.children[1].firstElementChild;
    deleteList.onclick = () => {
       list.remove();
    };
+   // add
    (() => {
       let num_of_card = 0;
       addCardBtn.onclick = function () {
@@ -51,10 +52,7 @@ function listComponent(nthList) {
    // rename
    const renameList = list.children[1].firstElementChild;
    const listName = renameList.children;
-   setTimeout(
-      () => setFocus(renameList, listName[1], listName[0].textContent),
-      0
-   );
+   setTimeout(() => setFocus(renameList, listName[1], listName[0].textContent), 0);
 
    renameList.ondblclick = () => {
       setFocus(renameList, listName[1], listName[0].textContent);
@@ -62,35 +60,9 @@ function listComponent(nthList) {
    renameList.addEventListener("focusout", () => {
       FocusOut(renameList, listName);
    });
-   //drag and drop
-   // dropOperation(list.children[2]);
 
    return list;
 }
-
-// function dropOperation(list) {
-//    // eve
-//    list.ondragover = (e) => {
-//       e.preventDefault();
-//       list.classList.add("drag-enter");
-//    }
-//    list.ondragleave = (e) => {
-//       list.classList.remove("drag-enter");
-//    }
-//    list.ondragend = (e) => {
-//       list.classList.remove("drag-enter");
-//    }
-//    list.ondrop = e => {
-//       // console.log(Math.round(list.getBoundingClientRect().top));
-//       // console.log(Math.round(list.getBoundingClientRect().bottom));
-//       // console.log(e.clientY);
-//       e.preventDefault();
-//       const dragID = e.dataTransfer.getData("text/plain");
-//       const cd = document.getElementById(dragID);
-
-//       list.appendChild(cd);
-//    }
-// }
 
 function cardComponent(listID, no) {
    const cardBlock = document.createElement("li");
@@ -121,11 +93,7 @@ function cardComponent(listID, no) {
    // rename eve
    const cardContentCtr = card.firstElementChild.children[1]; //
    const cardContent = cardContentCtr.children; //
-   setTimeout(
-      () =>
-         setFocus(cardContentCtr, cardContent[1], cardContent[0].textContent),
-      0
-   );
+   setTimeout(() => setFocus(cardContentCtr, cardContent[1], cardContent[0].textContent), 0);
 
    cardContentCtr.ondblclick = () => {
       setFocus(cardContentCtr, cardContent[1], cardContent[0].textContent);
@@ -135,14 +103,13 @@ function cardComponent(listID, no) {
    });
 
    dragOperation(cardBlock);
-
    return cardBlock;
 }
 
 function dragOperation(item) {
    item.ondragstart = function (e) {
       e.dataTransfer.setData("text/plain", this.id);
-      disablePointerEve(this, "block");
+      disablePointerEve(this, "none", "add");
    };
 
    item.ondragover = (e) => {
@@ -155,19 +122,19 @@ function dragOperation(item) {
       const clone = original.parentElement.removeChild(original);
       e.target.parentElement.insertBefore(clone, e.target);
 
-      disablePointerEve(clone, "block");
+      disablePointerEve(clone, "block", "remove");
    };
 
    item.ondragend = function () {
-      disablePointerEve(this, "block");
+      disablePointerEve(this, "block", "remove");
    };
 }
 
-function disablePointerEve(target, display) {
+function disablePointerEve(target, display, addRem) {
    const cards = document.querySelectorAll(".card-block");
-   cards.forEach((card) => card.classList.add("dragged"));
+   target.classList[addRem]("dragged-item")
+   cards.forEach((card) => card.classList[addRem]("dragged"));
 
-   display == "none" ? target.classList.add("dragged-item") : target.classList.remove("dragged-item");
    setTimeout(() => target.style.display = display, 0);
 }
 

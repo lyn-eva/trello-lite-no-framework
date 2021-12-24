@@ -215,7 +215,6 @@ header {
   min-height: 1rem;
   padding-top: .01px;
   margin: .6rem 0;
-  outline: 2px solid red;
 }
 
 .list-fdr button {
@@ -223,14 +222,6 @@ header {
   padding: 9px .4rem;
   text-align: left;
   border-radius: 5px;
-}
-
-.drag-init > * {
-  pointer-events: none;
-}
-
-.card-block {
-  background-color: transparent;
 }
 
 .card-block + .card-block {
