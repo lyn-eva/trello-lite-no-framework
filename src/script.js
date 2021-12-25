@@ -60,7 +60,38 @@ function listComponent(nthList) {
       FocusOut(renameList, listName);
    });
 
+   //drop
+   cardDropOperation(list.children[2])
+
    return list;
+}
+
+function cardDropOperation(ctr) {
+   ctr.ondragover = (e) => {
+      e.preventDefault();
+   }
+   
+   ctr.ondragenter = function() {
+      if (this.getBoundingClientRect().height > 17) return;
+      this.classList.add("drag-enter")
+      this.style.paddingTop = "30px"
+   }
+   ctr.ondragleave = function(e) {
+      this.style.paddingTop = ".01px"
+      this.classList.remove("drag-enter");
+   }
+   
+   ctr.ondrop = function(e) {
+      e.preventDefault();
+      if (this.children.length > 1) return;
+      const original = document.getElementById(e.dataTransfer.getData("text/plain"));
+      const clone = original.parentElement.removeChild(original);
+      this.appendChild(clone);
+      this.style.paddingTop = ".01px"
+      this.classList.remove("drag-enter");
+      
+      disablePointerEve(clone, "block", "remove");
+   };
 }
 
 function cardComponent(listID, no) {
@@ -101,11 +132,11 @@ function cardComponent(listID, no) {
       FocusOut(cardContentCtr, cardContent);
    });
 
-   dragOperation(cardBlock);
+   cardDragOperation(cardBlock);
    return cardBlock;
 }
 
-function dragOperation(item) {
+function cardDragOperation(item) {
    item.ondragstart = function (e) {
       e.dataTransfer.setData("text/plain", this.id);
       disablePointerEve(this, "none", "add");
@@ -114,8 +145,6 @@ function dragOperation(item) {
    item.ondragover = (e) => {
       e.preventDefault();
    };
-   
-   let cond = false;
    item.ondragenter = e => {
       item.classList.add("drag-enter")
    }
@@ -127,7 +156,7 @@ function dragOperation(item) {
       e.preventDefault();
       const original = document.getElementById(e.dataTransfer.getData("text/plain"));
       const clone = original.parentElement.removeChild(original);
-      e.target.parentElement.insertBefore(clone, e.target);
+      this.parentElement.insertBefore(clone, this);
       this.classList.remove("drag-enter");
 
       disablePointerEve(clone, "block", "remove");
