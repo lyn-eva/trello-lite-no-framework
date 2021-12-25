@@ -215,7 +215,6 @@ header {
   min-height: 1rem;
   padding-top: .01px;
   margin: .6rem 0;
-  outline: 1px solid red;
 }
 
 .list-fdr button {
@@ -243,6 +242,13 @@ header {
   background-color: #e0e0e0;
 }
 
+.card-block {
+  -webkit-transform-origin: center top;
+          transform-origin: center top;
+  -webkit-animation: addCard 300ms;
+          animation: addCard 300ms;
+}
+
 .card-block + .card-block {
   margin-top: .4rem;
 }
@@ -262,10 +268,6 @@ header {
   -webkit-box-shadow: 0 1px 0px 0px #091e4240;
           box-shadow: 0 1px 0px 0px #091e4240;
   border-radius: 3px;
-  -webkit-transform-origin: center top;
-          transform-origin: center top;
-  -webkit-animation: addCard 300ms;
-          animation: addCard 300ms;
 }
 
 .card:hover {

@@ -183,7 +183,6 @@ header {
    min-height: 1rem;
    padding-top: .01px;
    margin: .6rem 0;
-   outline: 1px solid red;
 }
 .list-fdr {
    button {
@@ -208,10 +207,14 @@ header {
    box-shadow: 0 0 6px inset #ccc;
    background-color: #e0e0e0;
 }
+
+.card-block {
+   transform-origin: center top;
+   animation: addCard 300ms; // add card
+}
 .card-block + .card-block {
    margin-top: .4rem;
 }
-
 .dragged * {
    pointer-events: none;
 }
@@ -224,8 +227,6 @@ header {
    background-color: $white-clr;
    box-shadow: 0 1px 0px 0px #091e4240;
    border-radius: 3px;
-   transform-origin: center top;
-   animation: addCard 300ms; // add card
     
    &:hover {
       background-color: #e7d7e6;
