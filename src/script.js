@@ -43,7 +43,6 @@ function listComponent(nthList) {
    (() => {
       let num_of_card = 0;
       addCardBtn.onclick = function () {
-         //just want to use "this" :)
          const ctr = this.previousElementSibling;
          ctr.appendChild(cardComponent(listId, num_of_card));
          num_of_card++;
@@ -115,17 +114,27 @@ function dragOperation(item) {
    item.ondragover = (e) => {
       e.preventDefault();
    };
+   
+   let cond = false;
+   item.ondragenter = e => {
+      item.classList.add("drag-enter")
+   }
+   item.ondragleave = function(e) {
+      this.classList.remove("drag-enter");
+   }
 
-   item.ondrop = (e) => {
+   item.ondrop = function(e) {
       e.preventDefault();
       const original = document.getElementById(e.dataTransfer.getData("text/plain"));
       const clone = original.parentElement.removeChild(original);
       e.target.parentElement.insertBefore(clone, e.target);
+      this.classList.remove("drag-enter");
 
       disablePointerEve(clone, "block", "remove");
    };
 
    item.ondragend = function () {
+      this.classList.remove("drag-enter");
       disablePointerEve(this, "block", "remove");
    };
 }

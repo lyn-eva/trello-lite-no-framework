@@ -203,7 +203,7 @@ header {
 .list-menu li:hover {
   cursor: pointer;
   border-color: #000;
-  background-color: #CCC;
+  background-color: #eee;
 }
 
 .list-menu-dropped {
@@ -222,6 +222,24 @@ header {
   padding: 9px .4rem;
   text-align: left;
   border-radius: 5px;
+}
+
+.drag-enter {
+  padding-top: 52px;
+  position: relative;
+}
+
+.drag-enter::before {
+  position: absolute;
+  content: '';
+  width: 280px;
+  height: 46px;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 6px inset #ccc;
+          box-shadow: 0 0 6px inset #ccc;
+  background-color: #e0e0e0;
 }
 
 .card-block + .card-block {
@@ -313,10 +331,6 @@ header {
 
 .card:hover i {
   opacity: 1;
-}
-
-.drag-enter {
-  background-color: greenyellow;
 }
 
 .delete-card {
