@@ -67,77 +67,23 @@ function listComponent(nthList) {
    return list;
 }
 
-
-
-function listDragOperation(item) {
-   item.ondragstart = function (e) {
-      e.dataTransfer.setData("text/plain", this.id);
-      disablePointerEve1(this, "none", "add");
-   };
-
-   item.ondragover = (e) => {
-      e.preventDefault();
-   };
-   item.ondragenter = e => {
-      item.classList.add("drag-enter")
-   }
-   item.ondragleave = function(e) {
-      this.classList.remove("drag-enter");
-   }
-
-   item.ondrop = function(e) {
-      e.preventDefault();
-      const original = document.getElementById(e.dataTransfer.getData("text/plain"));
-      const clone = original.parentElement.removeChild(original);
-      this.parentElement.insertBefore(clone, this);
-      this.classList.remove("drag-enter");
-
-      disablePointerEve1(clone, "block", "remove");
-   };
-
-   item.ondragend = function (e) {
-      this.classList.remove("drag-enter");
-      disablePointerEve1(this, "block", "remove");
-      e.dataTransfer.clearData();
-   };
-}
-
-function disablePointerEve1(target, display, addRem) {
-   const cards = document.querySelectorAll(".list-ctr");
-   target.classList[addRem]("dragged-item")
-   cards.forEach((card) => card.classList[addRem]("dragged"));
-
-   setTimeout(() => target.style.display = display, 0);
-}
-
-
-
-
 function cardDropOperation(ctr) {
    ctr.ondragover = (e) => {
       e.preventDefault();
    }
-   
    ctr.ondragenter = function() {
       if (this.getBoundingClientRect().height > 17) return;
-      this.classList.add("drag-enter")
-      this.style.paddingTop = "30px"
+      this.classList.add("drag-enter");
    }
-   ctr.ondragleave = function(e) {
-      this.style.paddingTop = ".01px"
+   ctr.ondragleave = function() {
       this.classList.remove("drag-enter");
    }
-   
    ctr.ondrop = function(e) {
       e.preventDefault();
       if (this.children.length > 1) return;
-      const original = document.getElementById(e.dataTransfer.getData("text/plain"));
-      const clone = original.parentElement.removeChild(original);
-      this.appendChild(clone);
-      this.style.paddingTop = ".01px"
+      const card = document.querySelector(".dragged-item");
+      this.appendChild(card);
       this.classList.remove("drag-enter");
-      
-      disablePointerEve(clone, "block", "remove");
    };
 }
 
@@ -185,46 +131,44 @@ function cardComponent(listID, no) {
 
 function cardDragOperation(item) {
    item.ondragstart = function (e) {
-      e.dataTransfer.setData("text/plain", this.id);
       disablePointerEve(this, "none", "add");
    };
-
    item.ondragover = (e) => {
       e.preventDefault();
    };
-   item.ondragenter = e => {
+   item.ondragenter = function(e) {
       console.log(document.querySelector(".dragged-item"));
-      const cards = document.querySelectorAll(".card-block");
-      cards.forEach(card => {
-         card.classList.remove("drag-enter");
-      })
-      item.classList.add("drag-enter")
+      removeDragHover();
+      this.classList.add("drag-enter");
    }
-   // item.ondragleave = function(e) {
-   //    this.classList.remove("drag-enter");
-   // }
-
+   item.ondragleave = (e) => {
+      removeDragHover();
+   }
    item.ondrop = function(e) {
       e.preventDefault();
-      const original = document.getElementById(e.dataTransfer.getData("text/plain"));
-      const clone = original.parentElement.removeChild(original);
-      this.parentElement.insertBefore(clone, this);
+      const card = document.querySelector(".dragged-item");
+      this.parentElement.insertBefore(card, this);
       this.classList.remove("drag-enter");
-
-      disablePointerEve(clone, "block", "remove");
    };
-
    item.ondragend = function (e) {
-      this.classList.remove("drag-enter");
+      removeDragHover();
       disablePointerEve(this, "block", "remove");
    };
 }
 
+function removeDragHover() {
+   const cards = document.querySelectorAll(".card-block");
+   cards.forEach(card => {
+      card.classList.remove("drag-enter");
+   });
+}
+
 function disablePointerEve(target, display, addRem) {
    const cards = document.querySelectorAll(".card-block");
-   target.classList[addRem]("dragged-item")
-   cards.forEach((card) => card.classList[addRem]("dragged"));
-
+   target.classList[addRem]("dragged-item");
+   cards.forEach((card) => {
+      card.classList[addRem]("dragged");
+   });
    setTimeout(() => target.style.display = display, 0);
 }
 

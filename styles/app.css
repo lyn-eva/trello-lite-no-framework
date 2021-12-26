@@ -220,6 +220,7 @@ header {
   min-height: 1rem;
   padding-top: 0.01px;
   margin: 0.6rem 0;
+  position: relative;
 }
 
 .list-fdr button {
@@ -256,6 +257,17 @@ header {
   -webkit-box-shadow: 0 0 6px inset #ccc;
           box-shadow: 0 0 6px inset #ccc;
   background-color: #e0e0e0;
+}
+
+.list-main.drag-enter {
+  margin-bottom: 29px;
+}
+
+.list-main.drag-enter::before {
+  width: 280px;
+  height: 46px;
+  top: 0;
+  left: 0;
 }
 
 .dragged * {
