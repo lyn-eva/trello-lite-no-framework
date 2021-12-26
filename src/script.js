@@ -24,6 +24,7 @@ function listComponent(nthList) {
    const list = document.createElement("div");
    list.setAttribute("class", "list-ctr");
    list.setAttribute("id", listId);
+   list.setAttribute("draggable", "true");
    list.innerHTML = `<div class="list-hdr"><div class="list-title"><h3>My List</h3><textarea maxlength="696"></textarea></div><button><i class="fas fa-ellipsis-h"></i></button></div><ul class="list-main"></ul>`;
 
    list.insertBefore(listMenu, list.firstElementChild);
@@ -61,10 +62,56 @@ function listComponent(nthList) {
    });
 
    //drop
-   cardDropOperation(list.children[2])
-
+   cardDropOperation(list.children[2]);
+   // listDragOperation(list);
    return list;
 }
+
+
+
+function listDragOperation(item) {
+   item.ondragstart = function (e) {
+      e.dataTransfer.setData("text/plain", this.id);
+      disablePointerEve1(this, "none", "add");
+   };
+
+   item.ondragover = (e) => {
+      e.preventDefault();
+   };
+   item.ondragenter = e => {
+      item.classList.add("drag-enter")
+   }
+   item.ondragleave = function(e) {
+      this.classList.remove("drag-enter");
+   }
+
+   item.ondrop = function(e) {
+      e.preventDefault();
+      const original = document.getElementById(e.dataTransfer.getData("text/plain"));
+      const clone = original.parentElement.removeChild(original);
+      this.parentElement.insertBefore(clone, this);
+      this.classList.remove("drag-enter");
+
+      disablePointerEve1(clone, "block", "remove");
+   };
+
+   item.ondragend = function (e) {
+      this.classList.remove("drag-enter");
+      disablePointerEve1(this, "block", "remove");
+      e.dataTransfer.clearData();
+   };
+}
+
+function disablePointerEve1(target, display, addRem) {
+   const cards = document.querySelectorAll(".list-ctr");
+   target.classList[addRem]("dragged-item")
+   cards.forEach((card) => card.classList[addRem]("dragged"));
+
+   setTimeout(() => target.style.display = display, 0);
+}
+
+
+
 
 function cardDropOperation(ctr) {
    ctr.ondragover = (e) => {
@@ -146,11 +193,16 @@ function cardDragOperation(item) {
       e.preventDefault();
    };
    item.ondragenter = e => {
+      console.log(document.querySelector(".dragged-item"));
+      const cards = document.querySelectorAll(".card-block");
+      cards.forEach(card => {
+         card.classList.remove("drag-enter");
+      })
       item.classList.add("drag-enter")
    }
-   item.ondragleave = function(e) {
-      this.classList.remove("drag-enter");
-   }
+   // item.ondragleave = function(e) {
+   //    this.classList.remove("drag-enter");
+   // }
 
    item.ondrop = function(e) {
       e.preventDefault();
@@ -162,7 +214,7 @@ function cardDragOperation(item) {
       disablePointerEve(clone, "block", "remove");
    };
 
-   item.ondragend = function () {
+   item.ondragend = function (e) {
       this.classList.remove("drag-enter");
       disablePointerEve(this, "block", "remove");
    };

@@ -19,7 +19,8 @@ button {
   border: none;
 }
 
-button:hover, .card:hover {
+button:hover,
+.card:hover {
   cursor: pointer;
 }
 
@@ -51,7 +52,8 @@ textarea {
   height: 4.2rem;
 }
 
-.card p, .list-title h3 {
+.card p,
+.list-title h3 {
   white-space: pre-wrap;
 }
 
@@ -73,12 +75,13 @@ header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: .5rem;
-  padding: .5rem;
+  gap: 0.5rem;
+  padding: 0.5rem;
 }
 
-.add-list i, .list-fdr i {
-  margin-right: .5rem;
+.add-list i,
+.list-fdr i {
+  margin-right: 0.5rem;
 }
 
 .add-list {
@@ -110,7 +113,7 @@ header {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 280px;
           flex: 0 0 280px;
-  padding: .6rem;
+  padding: 0.6rem;
   border-radius: 5px;
   -ms-flex-item-align: start;
       align-self: flex-start;
@@ -118,7 +121,7 @@ header {
 }
 
 .list-ctr button:hover {
-  background-color: #CCC;
+  background-color: #ccc;
 }
 
 .list-hdr {
@@ -141,11 +144,13 @@ header {
   position: relative;
 }
 
-.list-hdr textarea, .list-hdr h3 {
+.list-hdr textarea,
+.list-hdr h3 {
   padding-left: 6px;
 }
 
-.list-hdr h3, .list-hdr button {
+.list-hdr h3,
+.list-hdr button {
   font-weight: 400;
 }
 
@@ -169,7 +174,7 @@ header {
   top: 2.3rem;
   width: 100%;
   background-color: #fff;
-  padding: .3rem 1rem;
+  padding: 0.3rem 1rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   border-radius: inherit;
@@ -195,7 +200,7 @@ header {
   padding: 6px 0 6px 6px;
   -webkit-transition: 200ms;
   transition: 200ms;
-  color: #2B2D42;
+  color: #2b2d42;
   border-left: 3px solid #fff;
   border-bottom: 1px solid #fff;
 }
@@ -213,33 +218,15 @@ header {
 
 .list-main {
   min-height: 1rem;
-  padding-top: .01px;
-  margin: .6rem 0;
+  padding-top: 0.01px;
+  margin: 0.6rem 0;
 }
 
 .list-fdr button {
   width: 100%;
-  padding: 9px .4rem;
+  padding: 9px 0.4rem;
   text-align: left;
   border-radius: 5px;
-}
-
-.drag-enter {
-  padding-top: 52px;
-  position: relative;
-}
-
-.drag-enter::before {
-  position: absolute;
-  content: '';
-  width: 280px;
-  height: 46px;
-  top: 0;
-  left: 0;
-  border-radius: 3px;
-  -webkit-box-shadow: 0 0 6px inset #ccc;
-          box-shadow: 0 0 6px inset #ccc;
-  background-color: #e0e0e0;
 }
 
 .card-block {
@@ -250,7 +237,25 @@ header {
 }
 
 .card-block + .card-block {
-  margin-top: .4rem;
+  margin-top: 0.4rem;
+}
+
+.list-main .drag-enter {
+  margin-top: 58px;
+  position: relative;
+}
+
+.drag-enter::before {
+  position: absolute;
+  content: "";
+  width: 280px;
+  height: 46px;
+  top: -52px;
+  left: 0;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 6px inset #ccc;
+          box-shadow: 0 0 6px inset #ccc;
+  background-color: #e0e0e0;
 }
 
 .dragged * {
@@ -300,7 +305,8 @@ header {
   width: 264px;
 }
 
-.card p, .card textarea {
+.card p,
+.card textarea {
   font-size: 15px;
   font-weight: 300;
   min-height: 30.4px;
@@ -313,8 +319,8 @@ header {
 
 .card i {
   position: absolute;
-  right: .9rem;
-  top: .5rem;
+  right: 0.9rem;
+  top: 0.5rem;
   opacity: 0;
   -webkit-transition: opacity 300ms;
   transition: opacity 300ms;
