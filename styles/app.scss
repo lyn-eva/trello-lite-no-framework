@@ -230,7 +230,6 @@ header {
 }
 .list-main.drag-enter {
    margin-bottom: 29px;
-   
 }
 .list-main.drag-enter::before {
    width: 280px;
@@ -238,9 +237,19 @@ header {
    top: 0;
    left: 0;
 }
+.list-ctr.drag-enter {
+   margin-right: 288px;
+}
+.list-ctr.drag-enter::before {
+   height: 300px;
+   top: 0;
+   left: calc(100% + .5rem);
+   box-shadow: 0 0 6px inset rgb(104, 104, 104);
+   background-color: #006aa8;
+}
 
 
-.dragged * {
+.disable-pointer-eve * {
    pointer-events: none;
 }
 .dragged-item {

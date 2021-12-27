@@ -63,30 +63,9 @@ function listComponent(nthList) {
 
    //drop
    cardDropOperation(list.children[2]);
-   // listDragOperation(list);
+   // listDragDrop(list);
    return list;
 }
-
-function cardDropOperation(ctr) {
-   ctr.ondragover = (e) => {
-      e.preventDefault();
-   }
-   ctr.ondragenter = function() {
-      if (this.getBoundingClientRect().height > 17) return;
-      this.classList.add("drag-enter");
-   }
-   ctr.ondragleave = function() {
-      this.classList.remove("drag-enter");
-   }
-   ctr.ondrop = function(e) {
-      e.preventDefault();
-      if (this.children.length > 1) return;
-      const card = document.querySelector(".dragged-item");
-      this.appendChild(card);
-      this.classList.remove("drag-enter");
-   };
-}
-
 function cardComponent(listID, no) {
    const cardBlock = document.createElement("li");
    const attr = {
@@ -129,20 +108,82 @@ function cardComponent(listID, no) {
    return cardBlock;
 }
 
+function listDragDrop(list) {
+   // console.log(list);
+   list.ondragstart = function(e) {
+      if (e.target.classList.contains("card-block")) return;
+      this.classList.add("dragged-item");
+      disableListEve("add");
+      setTimeout(() => this.style.display = "none", 0);  
+   }
+   
+   list.ondragover = function(e) {
+      e.preventDefault();
+   }
+   
+   list.ondragenter = function(e) {
+      console.log('target', e.target);
+      console.log('currenttarget', e.currentTarget);
+      if (e.target.classList.contains("card-block")) return;
+      removeDragHover("card-block"); //
+      this.classList.add("drag-enter");
+   }
+   list.ondragleave = function() {
+      this.classList.remove("drag-enter");
+   }
+   
+   list.ondrop = function(e) {
+      e.preventDefault();
+      if (e.target.classList.contains("card-block")) return;
+      disableListEve("remove");
+      const card = document.querySelector(".dragged-item");
+      console.log(card);
+      this.after(card);
+      this.classList.remove("drag-enter"); ///
+   }
+   
+   list.ondragend = function(e) {
+      disableListEve("remove");
+      this.style.display = "block";
+      this.classList.remove("drag-enter"); ///
+      this.classList.remove("dragged-item") ///
+   }
+}
+function disableListEve(cond) {
+   const lists = document.querySelectorAll(".list-ctr");
+   lists.forEach(list => list.classList[cond]("disable-pointer-eve"));
+}
+
+function cardDropOperation(ctr) {
+   ctr.ondragover = (e) => {
+      e.preventDefault();
+   }
+   ctr.ondragenter = function(e) { ///
+      if (this.getBoundingClientRect().height > 17) return;
+      removeDragHover("card-block"); //
+      this.classList.add("drag-enter");
+   }
+   ctr.ondragleave = function() {
+      this.classList.remove("drag-enter");
+   }
+   ctr.ondrop = function(e) {
+      e.preventDefault();
+      if (this.children.length > 1) return;
+      const card = document.querySelector(".dragged-item");
+      this.appendChild(card);
+      this.classList.remove("drag-enter");
+   };
+}
 function cardDragOperation(item) {
    item.ondragstart = function (e) {
-      disablePointerEve(this, "none", "add");
+      disableCardEve(this, "none", "add");
    };
    item.ondragover = (e) => {
       e.preventDefault();
    };
    item.ondragenter = function(e) {
-      console.log(document.querySelector(".dragged-item"));
-      removeDragHover();
+      removeDragHover("card-block");
       this.classList.add("drag-enter");
-   }
-   item.ondragleave = (e) => {
-      removeDragHover();
    }
    item.ondrop = function(e) {
       e.preventDefault();
@@ -151,23 +192,22 @@ function cardDragOperation(item) {
       this.classList.remove("drag-enter");
    };
    item.ondragend = function (e) {
-      removeDragHover();
-      disablePointerEve(this, "block", "remove");
+      // this.classList.remove("drag-enter");
+      removeDragHover("card-block");
+      disableCardEve(this, "block", "remove");
    };
 }
-
-function removeDragHover() {
-   const cards = document.querySelectorAll(".card-block");
-   cards.forEach(card => {
-      card.classList.remove("drag-enter");
+function removeDragHover(className) {
+   const nodes = document.querySelectorAll(className);
+   nodes.forEach(node => {
+      node.classList.remove("drag-enter");
    });
 }
-
-function disablePointerEve(target, display, addRem) {
+function disableCardEve(target, display, addRem) {
    const cards = document.querySelectorAll(".card-block");
    target.classList[addRem]("dragged-item");
    cards.forEach((card) => {
-      card.classList[addRem]("dragged");
+      card.classList[addRem]("disable-pointer-eve");
    });
    setTimeout(() => target.style.display = display, 0);
 }
@@ -176,13 +216,11 @@ function setFocus(inpCtr, realTxt, txt) {
    inpCtr.classList.add("rename");
    focusTextInput(realTxt, txt);
 }
-
 function focusTextInput(content, currentTxt) {
    content.value = currentTxt;
    content.focus();
    content.select();
 }
-
 function FocusOut(inpCtr, nodes) {
    nodes[0].textContent = nodes[1].value;
    inpCtr.classList.remove("rename");

@@ -270,7 +270,20 @@ header {
   left: 0;
 }
 
-.dragged * {
+.list-ctr.drag-enter {
+  margin-right: 288px;
+}
+
+.list-ctr.drag-enter::before {
+  height: 300px;
+  top: 0;
+  left: calc(100% + .5rem);
+  -webkit-box-shadow: 0 0 6px inset #686868;
+          box-shadow: 0 0 6px inset #686868;
+  background-color: #006aa8;
+}
+
+.disable-pointer-eve * {
   pointer-events: none;
 }
 
